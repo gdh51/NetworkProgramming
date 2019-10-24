@@ -70,4 +70,30 @@ POST方法用于请求目标服务器接收客户端发来的报文主体作为�
 
 如果不遵从标准，那么GET和POST可以完全一样，具体实现还是看后端。
 
-### 如何理解RESTFUL规范
+### 如何理解RESTFUL API
+RESTFUL(Resource Representational State Transfer 表现层状态转移)是一种设计API的模式、风格，它描述了客户端与服务器端的一种交互形式，用一句话概括就是**URL中名称定位资源，用HTTP动词(GET,POST,DELETE,PUT...)描述操作**。
+
+如：
++ GET:获取资源
++ POST：创建、更新资源
++ PUT：更新资源
++ DELETE：删除资源
++ PATCH：更新部分资源
+
+具体的
+`GET：api.xx.com/books` ：获取全部books的数据
+`DELETE：api.xx.com/book`：删除某个book的数据
+
+总结：
+- 一种接口设计风格，服务器与客户端的一种交互形式
+- 用URL与资源的名词形式来定位要操作资源(名词推荐用复数形式)
+- `HTTP Methods` (动词)来定义对资源的操作
+- API返回的数据类型应该统一为一种形式，推荐为JSON类型，当然也可以是其他类型。
+- 用`HTTP Status Code`传递`Server`的状态信息，比如200为成功，500为服务器内部错误。
+
+[参考](https://www.zhihu.com/question/28557115/answer/48094438)
+
+### 如何理解SOAP
+SOAP即简单对象访问协议(Simple Object Access Protocol)，是一种简单的轻量的基于XML的协议。(未完结)
+
+### 如何理解webServer
