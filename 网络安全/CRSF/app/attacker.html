@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <form method="POST" action="http://localhost:3000" target="tool">
+    </form>
+    <iframe src="" name="tool"></iframe> -->
+    <button>点击</button>
+    <div></div>
+    <script>
+        // const form = document.querySelector('form');
+        // form.submit();
+        const btn = document.querySelector('button');
+        const div = document.querySelector('div');
+        getMsg('get');
+        btn.onclick = function () {
+            getMsg('post');
+        }
+
+        function print(msg) {
+            div.innerHTML = msg;
+        }
+
+        function getMsg(methods) {
+            const xhr = new XMLHttpRequest();
+            xhr.open(methods, 'http://localhost:3000', true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status >= 200) {
+                    print(xhr.response);
+                }
+            }
+
+            xhr.send();
+        }
+    </script>
+</body>
+
+</html>
