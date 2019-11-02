@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            height: 500px;
+            padding-top: 300px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        input {
+            margin: 0 auto;
+        }
+        span {
+            display: block;
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        Text:
+        <input type="text" value="ccc"/>
+        <button type="button" onclick="search()">查询</button>
+        <a href="javascript:alert('XSS');">Click</a>
+        <span></span>
+        <span>Copy:&lt;script&gt;&lt;/script&gt;</span>
+    </div>
+    <script>
+        const span = document.querySelector('span');
+        const text = document.querySelector('input');
+        function search () {
+            span.innerHTML = text.value;
+        }
+        U+2028;
+    </script>
+</body>
+</html>
