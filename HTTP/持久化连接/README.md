@@ -4,7 +4,7 @@
 
 ## Keep-Alive头部
 
-`Connection: Keep-Alive`头部在HTTP1.1之前存在，但在HTTP1.1中被废弃了，因为持久化连接变成了默认行为。(如要关闭需用`Connection：Close`)
+`Connection: Keep-Alive`头部在HTTP1.1之前存在，但在HTTP1.1持久化连接变成了默认行为。(自带，如要关闭显式添加`Connection：Close`头部)
 
 >当然服务器不会一直保存长连接状态，它有一个具体的时间(自行设置)，超过这个时间就会断开。
 
