@@ -20,10 +20,33 @@
 </head>
 <body>
     <div class="container">
-        <label class="label">用户名：</label><input type="text" />
-        <button type="button">登陆</button type="button">
-        <label class="label">密码：</label class="label"><input type="text" />
-        <button type="button">注销</button>
+        <label class="label">用户名：</label><input type="text" id="username"/>
+        <button type="button" class="login">登陆</button type="button">
+        <label class="label">密码：</label class="label"><input type="text" id="password"/>
+        <button type="button" class="cancel">注销</button>
     </div>
+    <script>
+        const login = document.querySelector('.login'),
+            cancel = document.querySelector('.cancel'),
+            username = window.username,
+            password = window.password;
+
+        login.onclick = () => {
+            let xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                let res = JSON.parse(xhr.response);
+                if (res.code === 200) {
+                    localStorage.setItem('token', res.token);
+                } else {
+                    console.log(res.msg);
+                }
+            }
+            xhr.open('post', './login');
+            xhr.send(JSON.stringify({
+                username: username.value,
+                password: password.value
+            }));
+        }
+    </script>
 </body>
 </html>
