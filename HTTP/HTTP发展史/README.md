@@ -2,7 +2,7 @@
 
 ## HTTP1.0和HTTP1.1的区别
 
-1. **缓存处理**：`HTTP1.0`使用`If-Modified-Since`，`Expires`来做缓存的处理；`HTTP2.0`加入更多的缓存策略来做缓存处理如：`Etag`、`If-Unmodified-Since`、`If-Match`、`Cache-Control`等头部。
+1. **缓存处理**：`HTTP1.0`使用`If-Modified-Since`，`Expires`来做缓存的处理；`HTTP1.1`加入更多的缓存策略来做缓存处理如：`Etag`、`If-Unmodified-Since`、`If-Match`、`Cache-Control`等头部。
 
 2. **带宽优化及网络连接的使用**：`HTTP1.0`中存在一些浪费带宽的现象：如客户端只想请求服务器端某个对象的一部分数据，而服务器会将整个数据发送过来，并且不支持断点续传功能。`HTTP1.1`中加入`range`头部，它允许只请求资源的某个部分，即返回码是`206（Partial Content）`。
 
