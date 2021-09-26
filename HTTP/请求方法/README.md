@@ -4,15 +4,15 @@
 
 ## HTTP 1.0
 
-HTTP中1.0阶段定义了三种请求方式，分别为`GET`、`POST`和`HEAD`方法
+HTTP 中 1.0 阶段定义了三种请求方式，分别为`GET`、`POST`和`HEAD`方法
 
 ### POST
 
-向指定资源提交数据进行处理请求。数据包含在请求主体之中。POST请求会导致新的资源的建立或旧的资源的修改。
+向指定资源提交数据进行处理请求。数据包含在请求主体之中。POST 请求会导致新的资源的建立或旧的资源的修改。
 
 ### GET
 
-请求指定URL的页面信息，并返实物主体。
+请求指定 URL 的页面信息，并返实物主体。
 
 ### HEAD
 
@@ -20,7 +20,7 @@ HTTP中1.0阶段定义了三种请求方式，分别为`GET`、`POST`和`HEAD`�
 
 ## HTTP 1.1
 
-`HTTP`中1.1版本中，新增了6种请求方式：`OPTIONS`、`PUT`、`DELETE`、`TRACE`、`CONNECT`、`PATCH`
+`HTTP`中 1.1 版本中，新增了 6 种请求方式：`OPTIONS`、`PUT`、`DELETE`、`TRACE`、`CONNECT`、`PATCH`
 
 ### OPTIONS
 
@@ -28,11 +28,11 @@ HTTP中1.0阶段定义了三种请求方式，分别为`GET`、`POST`和`HEAD`�
 
 ### PUT
 
-用于将数据发送至服务器以创建或更新资源：将主体内容放在提供的`URL`下，如果`URL`指示的是当前的资源，则会改变；如果URL未指定当前资源，则服务器可以使用该`URL`来创建资源。(幂等)
+用于将数据发送至服务器以创建或更新资源：将主体内容放在提供的`URL`下，如果`URL`指示的是当前的资源，则会改变；如果 URL 未指定当前资源，则服务器可以使用该`URL`来创建资源。(幂等)
 
 ### DELETE
 
-`DELETE`方法用于删除指定的资源，它会删除URL给出的目标资源的所有当前内容。(幂等)
+`DELETE`方法用于删除指定的资源，它会删除 URL 给出的目标资源的所有当前内容。(幂等)
 
 ### TRACE
 
@@ -40,7 +40,7 @@ HTTP中1.0阶段定义了三种请求方式，分别为`GET`、`POST`和`HEAD`�
 
 ### CONNECT
 
-用于建立给定URL之间的隧道；它用简单的`TCP/IP`隧道更改请求连接
+用于建立给定 URL 之间的隧道；它用简单的`TCP/IP`隧道更改请求连接
 
 ### PATCH
 
@@ -50,70 +50,75 @@ HTTP中1.0阶段定义了三种请求方式，分别为`GET`、`POST`和`HEAD`�
 
 关于请求方式的问题集合：
 
-### PUT、POST、PATCH的区别
+### PUT、POST、PATCH 的区别
 
 首先了解一个概念：**幂等，意思是无论执行一个相同东西多少次，产生的效果都是一样的**。
 
 按照**标准**，这些方法应该以以下方式实现：
 
-方法|范围|是否幂等
-:-|:-|:-
-`POST`| `post` 请求的目的是根据资源自身的语义来处理这个资源|非幂等
-`PUT`|对资源**全部**进行更新或创建新的资源|幂等
-`PATCH`|对资源的**部分**进行更新或创建新的资源|非幂等
+| 方法    | 范围                                                | 是否幂等 |
+| :------ | :-------------------------------------------------- | :------- |
+| `POST`  | `post` 请求的目的是根据资源自身的语义来处理这个资源 | 非幂等   |
+| `PUT`   | 对资源**全部**进行更新或创建新的资源                | 幂等     |
+| `PATCH` | 对资源的**部分**进行更新或创建新的资源              | 非幂等   |
 
->`PUT`与`PATCH`的区别，`PUT`是根据客户端提供了完整的资源数据，客户端提交什么就替换什么，而`PATCH`有可能是根据客户端提供的参数或者指令，动态的计算出某个值，例如每次请求后资源的某个参数减1，所以多次调用，资源会有不同的变化。所以PATCH是非幂等的。
+> `PUT`与`PATCH`的区别，`PUT`是根据客户端提供了完整的资源数据，客户端提交什么就替换什么，而`PATCH`有可能是根据客户端提供的参数或者指令，动态的计算出某个值，例如每次请求后资源的某个参数减 1，所以多次调用，资源会有不同的变化。所以 PATCH 是非幂等的。
 
-[参考](https://segmentfault.com/q/1010000005685904)
+Reference:
+[1. SegmentFault-PATCH 和 PUT 方法的区别？](https://segmentfault.com/q/1010000005685904)
 
-### POST和GET的区别
+### POST 和 GET 的区别
 
 以下为实际使用时的区别：
-方法名|数据荷载方式|数据荷载大小|相对的安全|能否被缓存|刷新后退是否重复提交|幂等|是否有副作用
+方法名|数据荷载方式|数据荷载大小|安全，指数据保密|能否被缓存|刷新后退是否重复提交|幂等|安全，指副作用
 :-|:-|:-|:-|:-|:-|:-|:-
-GET|存放在URL的查询字符串中|有限制，限制来源于浏览器与服务器|不安全，会显示在浏览器记录中|是|是|否|是
-POST|存放在请求主体中|一般无限制，限制来源于服务器|相对安全，但是报文中可以查看|不能|不会|否|是
+GET|存放在 URL 的查询字符串中|有限制，限制来源于浏览器与服务器|不安全，会显示在浏览器记录中|是|是|是|安全
+POST|存放在请求主体中|一般无限制，限制来源于服务器|相对安全，但是报文中可以查看|不能(大部分不可以)|不会|否|不安全
 
-[参考](https://www.zhihu.com/question/28586791/answer/767316172)
+Reference:
+[1. 知乎-GET 和 POST 到底有什么区别？](https://www.zhihu.com/question/28586791/answer/767316172)
 
->为什么要限制URL长度：服务器处理URL会消耗一定的资源，防止恶意构造URL来攻击服务器，为了性能和安全考虑(一般来说URL长度限制为2048字节(2MB)在[Chrome浏览器中](https://code.google.com/p/chromium/issues/detail?id=69227))。
+> 为什么要限制 URL 长度：服务器处理 URL 会消耗一定的资源，防止恶意构造 URL 来攻击服务器，为了性能和安全考虑(一般来说 URL 长度限制为 2048 字节(2MB)在[Chrome 浏览器中](https://code.google.com/p/chromium/issues/detail?id=69227))。
 
 以下为**规范定义**的区别：
 `GET`意味着检索`URI`标识的信息(以实体的形式)
 
 `POST`方法用于请求目标服务器接收客户端发来的报文主体作为当前`URI`的新的下属资源
-[文档](https://tools.ietf.org/html/rfc2068#section-9.3)
 
->如果不遵从标准，那么`GET`和` `可以完全一样，具体实现还是看后端。
+Reference:
+[1. Hypertext Transfer Protocol -- HTTP/1.1](https://tools.ietf.org/html/rfc2068#section-9.3)
 
-### 如何理解RESTFUL API
+> 如果不遵从标准，那么`GET`和` `可以完全一样，具体实现还是看后端。
 
-`RESTFUL`(`Resource Representational State Transfer` 表现层状态转移)是一种设计API的模式、风格，它描述了客户端与服务器端的一种交互形式，用一句话概括就是**URL中名称定位资源，用HTTP动词(GET,POST,DELETE,PUT...)描述操作**。
+### 如何理解 RESTFUL API
+
+`RESTFUL`(`Resource Representational State Transfer` 表现层状态转移)是一种设计 API 的模式、风格，它描述了客户端与服务器端的一种交互形式，用一句话概括就是**URL 中名称定位资源，用 HTTP 动词(GET,POST,DELETE,PUT...)描述操作**。
 
 如：
 
-+ GET:获取资源
-+ POST：创建、更新资源
-+ PUT：更新资源
-+ DELETE：删除资源
-+ PATCH：更新部分资源
+-   GET:获取资源
+-   POST：创建、更新资源
+-   PUT：更新资源
+-   DELETE：删除资源
+-   PATCH：更新部分资源
 
 具体的
-`GET：api.xx.com/books` ：获取全部books的数据
-`DELETE：api.xx.com/book`：删除某个book的数据
+`GET：api.xx.com/books` ：获取全部 books 的数据
+`DELETE：api.xx.com/book`：删除某个 book 的数据
 
 总结：
 
-+ 一种接口设计风格，服务器与客户端的一种交互形式
-+ 用URL与资源的名词形式来定位要操作资源(名词推荐用复数形式)
-+ `HTTP Methods` (动词)来定义对资源的操作
-+ API返回的数据类型应该统一为一种形式，推荐为JSON类型，当然也可以是其他类型。
-+ 用`HTTP Status Code`传递`Server`的状态信息，比如200为成功，500为服务器内部错误。
+-   一种接口设计风格，服务器与客户端的一种交互形式
+-   用 URL 与资源的名词形式来定位要操作资源(名词推荐用复数形式)
+-   `HTTP Methods` (动词)来定义对资源的操作
+-   API 返回的数据类型应该统一为一种形式，推荐为 JSON 类型，当然也可以是其他类型。
+-   用`HTTP Status Code`传递`Server`的状态信息，比如 200 为成功，500 为服务器内部错误。
 
-[参考](https://www.zhihu.com/question/28557115/answer/48094438)
+Reference:
+[1. 知乎-怎样用通俗的语言解释 REST，以及 RESTful？](https://www.zhihu.com/question/28557115/answer/48094438)
 
-### 如何理解SOAP
+### 如何理解 SOAP
 
-SOAP即简单对象访问协议(Simple Object Access Protocol)，是一种简单的轻量的基于XML的协议。(未完结)
+SOAP 即简单对象访问协议(Simple Object Access Protocol)，是一种简单的轻量的基于 XML 的协议。(未完结)
 
-### 如何理解webServer
+### 如何理解 webServer

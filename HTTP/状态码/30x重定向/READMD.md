@@ -49,10 +49,11 @@
 | 允许将请求的方法由 POST 重定向为 GET | 301        | 302        |
 | 不允许将请求方法由 POST 重定向为 GET | 308        | 307        |
 
-[参考 1](https://zhuanlan.zhihu.com/p/60669395)
-[参考 2](https://stackoverflow.com/questions/42136829/whats-the-difference-between-http-301-and-308-status-codes)
+Reference:
+[1. 知乎-HTTP 中的 301、302、303、307、308 响应状态码](https://zhuanlan.zhihu.com/p/60669395)
+[2. StackOverflow-What's the difference between HTTP 301 and 308 status codes](https://stackoverflow.com/questions/42136829/whats-the-difference-between-http-301-and-308-status-codes)
 
 ## 两种重定向对 SEO 的影响
 
-- 永久重定向：搜索引擎在抓取新内容的同时也将旧的网址替换为重定向之后的网址。
-- 临时重定向：搜索引擎会**抓取新的内容而保留旧的网址**。因为服务器返回 302 代码，搜索引擎认为新的网址只是暂时的。
+-   永久重定向：搜索引擎在抓取新内容的同时也将旧的网址替换为重定向之后的网址。
+-   临时重定向：搜索引擎会**抓取新的内容而保留旧的网址**。因为服务器返回 302 代码，搜索引擎认为新的网址只是暂时的。
