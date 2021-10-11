@@ -4,7 +4,9 @@
 
 ## CSRF 的危害及其攻击手段
 
-攻击者诱导受害者进入第三方网站，在第三方网站中，向被攻击网站发送跨站请求。利用受害者在被攻击网站已经获取的**注册凭证**，绕过后台的用户验证，达到冒充用户对被攻击的网站执行某项操作的目的。
+攻击者诱导受害者进入第三方网站，在第三方网站中，向被攻击网站发送**跨站**请求。利用受害者在被攻击网站已经获取的**注册凭证**，绕过后台的用户验证，达到冒充用户对被攻击的网站执行某项操作的目的。
+
+> 注意这里是跨站不是跨域，跨站指**顶级域名**和**二级域名**与**协议**相同，端口可以不一样，则为跨站；跨域为主机、端口、协议三者都一样。所以**跨站一定跨域，但跨域不一定跨站**。
 
 攻击者可以利用被攻击者的身份，发送请求，来进行一系列的操作，比如：用你的账号关注他的账号、用你的账号转账、删除你账号的内容等等。
 
@@ -79,9 +81,13 @@
 
 针对`JSONP HiJacking`这种攻击方式，服务器端可以在返回脚本的开始部分加入`'while(1);'`：
 
-3. 加入该字段可以使攻击者代码陷入死循环中，而客户端可以先将该段代码去掉再进行处理。[参考](https://stackoverflow.com/questions/2669690/why-does-google-prepend-while1-to-their-json-responses)
+3. 加入该字段可以使攻击者代码陷入死循环中，而客户端可以先将该段代码去掉再进行处理。
 
 4. 设置`Cookie`的`Samesite`属性：当设置该值为`Lax`时部分跨站请求携带第三方`Cookie`，设置为`Strict`时完全不允许。
+
+Reference:
+
+1. [Why does Google prepend while(1); to their JSON responses?](https://stackoverflow.com/questions/2669690/why-does-google-prepend-while1-to-their-json-responses)
 
 #### Cookie 的 SameSite
 
@@ -90,8 +96,6 @@
 -   `Lax`：跨站时，允许部分三方请求携带`Cookie`
 -   `Strict`：完全禁止三方`Cookie`
 -   `None`：完全不禁止任何三方`Cookie`。
-
-注意这里是跨站不是跨域，跨站指**顶级域名**和**二级域名**与**协议**相同，端口可以不一样，则为跨站；跨域为主机、端口、协议三者都一样。所以**跨站一定跨域，但跨域不一定跨站**。
 
 > `Chrome`中`SameSite`默认值为`Lax`；`Safari`中`SameSite`默认值为`Strict`
 
@@ -103,6 +107,10 @@
 
 当`SameSite`的值为`None`时也需要注意，其只支持`HTTPS`协议，所以对应的`Cookie`还需设置`Secure`字段
 
+Reference:
+
+1. [知乎-Cookie SameSite 简析](https://zhuanlan.zhihu.com/p/266282015)
+
 ## NodeJs 例子
 
 1. 首先使用客户端在正常的情况下获取`cookie`
@@ -111,6 +119,8 @@
 
 在该目录的`app`文件中附属一个`node`服务器，可以自己改改实践一下。
 
-[参考 1](https://juejin.im/post/5aa11982f265da23a1417935#heading-6)
-[参考 2](https://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html)
-[参考 3](https://juejin.im/post/5bc009996fb9a05d0a055192#heading-24)
+Reference:
+
+1. [邪恶的 CSRF](https://juejin.im/post/5aa11982f265da23a1417935#heading-6)
+2. [浅谈 CSRF 攻击方式](https://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html)
+3. [前端安全系列之二：如何防止 CSRF 攻击？](https://juejin.im/post/5bc009996fb9a05d0a055192#heading-24)
